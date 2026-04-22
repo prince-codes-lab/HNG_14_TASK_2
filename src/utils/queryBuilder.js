@@ -21,6 +21,17 @@ const VALID_SORT_FIELDS = {
 function buildQuery(filters, sortBy, order) {
   const mongoFilter = {};
 
+  /*
+  mongoFilter = {
+  
+  
+  age: {
+    $gte: 18,
+    $lte: 25
+  },}
+  
+  */
+
   // ── Exact-match filters ───────────────────────────────────────────────────
   if (filters.gender)     mongoFilter.gender     = filters.gender;
   if (filters.age_group)  mongoFilter.age_group  = filters.age_group;
@@ -46,6 +57,16 @@ function buildQuery(filters, sortBy, order) {
   const sortField = VALID_SORT_FIELDS[sortBy] || 'created_at';
   const sortDir   = order === 'asc' ? 1 : -1;   // MongoDB: 1=asc, -1=desc
   const sortObj   = { [sortField]: sortDir };
+
+
+  /*
+  
+  const sortField = VALID_SORT_FIELDS[sortBy] || 'created_at';
+  const sortDir = order === 'asc' ? 1 : -1;   // MongoDB: 1=asc, -1=desc
+  const sortObj = {[sortField]: sortDir};
+  
+  
+  */
 
   return { mongoFilter, sortObj };
 }
